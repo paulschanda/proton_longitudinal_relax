@@ -1,0 +1,148 @@
+# Input file for RNA-proton relaxation simulator
+###############################################################
+# Molecule: pdb, frequencies, correlation times
+###############################################################
+# pdb file name
+../tar.pdb
+# Proton Frequency in MHz
+800
+# tau-c in nanoseconds
+8
+###############################################################
+# Solvent exchange
+###############################################################
+# Take into account solvent exchange (y/n), otherwise ignore completely ## I have only implemented 'y', because in RNA there is always exchange... So, set this to 'y'
+y
+# if yes: specify the exchanging atoms and their exchange rates in seconds^-1.
+# Possibilities: The same for a given atom type in all residues, e.g. U H3 100 means that all H3 of U bases exchange at a rate of 100 per second.
+# Alternative: Give atom-specific exchange rates for a given atom in a given base, eg 5 H1 20 means that proton H1 of base 5 exchanges at a rate of 20 per second.
+# Note that there MUST be an exchange rate for all these atoms: HO2', HO3',HO5',A H62, A H61, G H21, G H22, G H1, U H3, C H41, C H42
+U H3 	0.5
+C H41	10.0
+C H42	10.0
+G H1	0.5
+G H21	10.0
+G H22	10.0
+A H61	10.0
+A H62	10.0
+# sugars
+U HO2'	1.0
+U HO3'	1.0
+U HO5'	1.0
+C HO2'	1.0
+C HO3'	1.0
+C HO5'	1.0
+G HO2'	1.0
+G HO3'	1.0
+G HO5'	1.0
+A HO2'	1.0
+A HO3'	1.0
+A HO5'	1.0
+#21 HO2'  5
+#5  HO2'  5
+#19 HO2'  5
+#20 HO2'  5
+end_exchange
+# do not remove the above line with 'end_exchange' 
+################################################################
+# Initial conditions
+################################################################
+# Initial conditions of magnetization, any value from -1 (inverted) to 1 (in equilibrium), or set to s (=continuously saturated)
+# H5'
+0.0
+# H5''
+0.0
+# H4'
+0.0
+# H3'
+0.0
+# H2'
+0.0
+# H1'
+0.0
+# HO2'
+0.0
+# HO3'
+0.0
+# HO5'
+0.0
+#  A H8
+0.0
+#  A H61 AMINO
+0.0
+#  A H62 AMINO
+0.0
+#  A H2
+0.0
+#  G H8
+0.0
+#  G H1 IMINO
+0.0
+#  G H21 AMINO
+0.0
+#  G H22 AMINO
+0.0
+#  C H41 AMINO
+0.0
+#  C H42 AMINO
+0.0
+#  C H5
+0.0
+#  C H6
+0.0
+#  U H3 IMINO
+0.0
+#  U H5
+0.0
+#  U H6
+0.0
+# Special treatment for individual atoms ? (y/n)
+# if this is set to n, then the List of atoms below will be ignored
+n
+# List of atoms to be treated individually
+#3 H1' s
+end_initial_conditions
+# do not remove the above line "end_initial_conditions".
+################################################################
+# Simulation details
+################################################################
+# How many simulations should be done (for averaging the random water exchange jumps)
+300
+# Initial state of water-polarization ? (-1 to 1, where -1 is inverted, and 1 is in equilibrium)
+1
+# Water T1 in seconds
+2
+# Total simulation time in seconds
+4
+# Stepsize for matrix multiplication, in seconds, recommended below 0.001, otherwise math error
+0.001
+# Write out traces of magnetization vs time for all individual atoms ? (y/n)
+y
+# time between two consecutive data points to be written (must be multiple of simulation stepsize)
+0.01
+################################################################
+# Output preferences
+################################################################
+# How many different output parameters do you want to analyse ?
+1
+######
+# Analysis 1: kind of analysis: time point at which a certain value of magnetization is reached (t) or value of magnetization at end of sim (e)? (t/e)
+t
+# which (group of) nuclei ? Enter: imino, amino, aromatic or sugar or atom-names (eg U H3). Several consecutive lines can be used to make average over all the nuclei in the list.
+imino
+#U H3
+#G H1
+end_of_list
+## do not remove the above line "end_of_list"
+# Value of magnetization which has to be reached. e.g for an estimate of T1, starting from 90deg excitation, a fraction of 0.63 is reached after T1. Thus, enter here 0.63 and in the initial conditions 0 to get an estimate of T1.
+#
+0.63
+#####
+# Analysis 2: kind of analysis: time point at which a certain value of magnetization is reached (t) or value of magnetization at end of sim (e)? (t/e)
+t
+# which nuclei ?
+aromatic
+# 588 H
+end_of_list
+## do not remove the above line "end_of_list"
+###############

@@ -1,0 +1,93 @@
+###############################################################
+# Molecule: pdb, frequencies, correlation times
+###############################################################
+# pdb file name
+ubi.pdb
+# Proton Frequency in MHz
+600
+# tau-c in nanoseconds
+5
+# Methyl group order parameter
+0.11
+# Methyl group rotational correlation time in ns
+0.05
+###############################################################
+# Deuteration
+###############################################################
+# any deuteration of protein or solvent (=of exchangeable protons): (y/n)
+n
+# fraction of non-exchangeable hydrogen sites which are deuterated (1=fully deuterated, 0=protonated)
+0
+# fraction of exchangeable hydrogen sites which are deuterated (1=fully deuterated, 0=protonated)
+0
+# special treatment for individual atoms (ie anything else than randomly fractional)? (y/n)
+# (note: if this is set to 'n', then the list of specific labels (below) will be ignored.
+n
+# if yes: list of specific H- or D-labels
+VAL HB H
+588 HH11 D
+588 HH12 D
+end_deuteration
+# do not remove the above line with 'end_deuteration' 
+################################################################
+# Initial conditions
+################################################################
+# Excitation flip angle in degrees, will be applied to the spins at the beginning and at each subsequent scan. Set to a value (e.g. 90), or set to s (=continuously saturated)
+# Amide
+90
+#Aromatic
+15
+#Aliphatic, except CH3
+15
+#Methyl
+15
+# Special treatment for individual atoms ? (y/n)
+# if this is set to n, then the List of atoms below will be ignored
+n
+# List of atoms to be treated individually
+#ARG HA s
+end_initial_conditions
+# do not remove the above line "end_initial_conditions".
+################################################################
+# Simulation details
+################################################################
+# Take into account solvent-exchange of labile protons ? (y/n)
+y
+# Initial state of water-polarization ? (-1 to 1, where -1 is inverted, and 1 is in equilibrium, or s, which corresponds to constant saturation. In case of 's', the T1 is ignored and water kept at 0 all the time)
+#
+1
+# Water T1 in seconds
+3
+# Duration of one scan in seconds. The total time simulated will be the scan duration times the number of scans (below) 
+0.2
+# Number of scans
+10
+###############
+# Stepsize for matrix multiplication, in seconds, recommended below 0.001, otherwise math error
+0.001
+# Write out traces of magnetization vs time for all individual atoms ? (y/n)
+y
+# time between two consecutive data points to be written (must be multiple of simulation stepsize)
+0.01
+################################################################
+# Output preferences
+################################################################
+# How many different output parameters do you want to analyse ?
+2
+######
+# Analysis 1: kind of analysis: time point at which a certain value of magnetization is reached (t) or value of magnetization at end of sim (e)? (t/e)
+e
+# which (group of) nuclei ? Enter: amide arom aliph methyl or atom-names (eg ARG HA). Several consecutive lines can be used to make average over all the nuclei.
+amide
+end_of_list
+## do not remove the above line "end_of_list"
+#####
+# Analysis 2: kind of analysis: time point at which a certain value of magnetization is reached (t) or value of magnetization at end of sim (e)? (t/e)
+e
+# which nuclei ?
+aliph
+methyl
+# 588 H
+end_of_list
+## do not remove the above line "end_of_list"
+###############
